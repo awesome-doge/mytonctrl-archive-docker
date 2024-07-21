@@ -2,6 +2,7 @@ version: "3.3"
 services:
   ton-node:
     image: mytonctrl:2
+    container_name: mytonctrl-archive-node
     build:
       context: .
       dockerfile: Dockerfile
