@@ -27,7 +27,11 @@ services:
       options:
         max-size: 100m
         max-file: "3"
-    mem_limit: 32g  # 添加內存限制
+    deploy:
+      resources:
+        limits:
+          cpus: '16'  # 添加 CPU 使用限制
+          memory: 32g  # 添加内存限制
 volumes:
   ton:
   mytoncore:
