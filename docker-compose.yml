@@ -15,9 +15,11 @@ services:
     restart: always
     tty: true
     volumes:
-      - ton:/var/ton-work
+      - ton-work:/var/ton-work
       - mytoncore:/usr/local/bin/mytoncore
     network_mode: host
+    ports:
+      - "8888:8888"  # 映射外部端口 8888 到容器端口 8888
     environment:
       GLOBAL_CONFIG_URL: ${GLOBAL_CONFIG_URL}
       IGNORE_MINIMAL_REQS: ${IGNORE_MINIMAL_REQS}
@@ -33,5 +35,15 @@ services:
           cpus: '16'  # 添加 CPU 使用限制
           memory: 32g  # 添加内存限制
 volumes:
-  ton:
+  ton-work:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/mytonctrl-archive-node/ton-work
   mytoncore:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/mytonctrl-archive-node/mytoncore
