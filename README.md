@@ -31,3 +31,25 @@ Upgrade MyTonCtrl:
 
 * Build new image: `docker-compose build ton-node`
 * Run new version: `docker-compose up -d`
+
+
+docker exec -it mytonctrl-archive-node /bin/bash
+
+sudo docker logs -f mytonctrl-archive-node
+
+
+cd ~
+git clone https://github.com/awesome-doge/mytonctrl-archive-docker.git
+cd mytonctrl-archive-docker
+
+sudo mkdir -p /data/mytonctrl-archive-node/ton-work /data/mytonctrl-archive-node/mytoncore
+sudo chown -R $(whoami):$(whoami) /data/mytonctrl-archive-node/ton-work /data/mytonctrl-archive-node/mytoncore
+
+sudo docker-compose up --build
+
+sudo docker-compose down -v
+
+sudo rm -r /data/mytonctrl-archive-node/ton-work /data/mytonctrl-archive-node/mytoncore
+
+
+sudo docker exec -it mytonctrl-archive-node /bin/bash
