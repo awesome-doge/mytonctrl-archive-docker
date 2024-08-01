@@ -19,8 +19,8 @@ services:
       - mytoncore:/usr/local/bin/mytoncore
     network_mode: host
     ports:
-      - "8888:8888"  # 映射外部端口 8888 到容器端口 8888
-      - "9999:9999"  # 映射外部端口 9999 到容器端口 9999
+      - "8888:8888"  # validator
+      - "38182:38182"  # liteserver
     environment:
       GLOBAL_CONFIG_URL: ${GLOBAL_CONFIG_URL}
       IGNORE_MINIMAL_REQS: ${IGNORE_MINIMAL_REQS}
