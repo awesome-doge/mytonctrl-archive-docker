@@ -69,9 +69,11 @@ RUN wget -nv https://raw.githubusercontent.com/gdraheim/docker-systemctl-replace
     && sed -i 's/User=validator/User=root/g; s/Group=validator/Group=root/g' /etc/systemd/system/validator.service \
     && sed -i 's/--logname \/var\/ton-work\/log//g; s/--verbosity 1/--verbosity 3/g' /etc/systemd/system/validator.service \
     && sed -i 's/--archive-ttl 86400/--state-ttl 315360000 --archive-ttl 315360000 --block-ttl 315360000/g' /etc/systemd/system/validator.service \
+    && sed -i 's/--threads [0-9]\+/--threads 16/' /etc/systemd/system/validator.service \
     && sed -i 's/\[Service\]/\[Service\]\nStandardOutput=null\nStandardError=syslog/' /etc/systemd/system/validator.service \
     && sed -i 's/\[Service\]/\[Service\]\nStandardOutput=null\nStandardError=syslog/' /etc/systemd/system/mytoncore.service \
     && rm -rf /var/lib/apt/lists/* && rm -rf /root/.cache/pip
+
 
 VOLUME ["/var/ton-work", "/usr/local/bin/mytoncore"]
 COPY --chmod=755 scripts/entrypoint.sh/ /scripts/entrypoint.sh
